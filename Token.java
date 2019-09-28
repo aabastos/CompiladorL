@@ -4,23 +4,23 @@
 
 public class Token {
 
-    public Simbolo simbolo;
+    public int simbolo;
     public String lexema;
 
     public Token() {
 
     }
 
-    public Token(Simbolo simbolo, String lexema) {
+    public Token(int simbolo, String lexema) {
         this.simbolo = simbolo;
         this.lexema = lexema;
     }
 
-    public void setSimbolo(Simbolo simbolo) {
+    public void setSimbolo(int simbolo) {
         this.simbolo = simbolo;
     }
 
-    public Simbolo getSimbolo() {
+    public int getSimbolo() {
         return this.simbolo;
     }
 
