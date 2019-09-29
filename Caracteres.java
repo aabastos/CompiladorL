@@ -4,6 +4,7 @@ public class Caracteres {
       'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
   public static char digitos[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
   public static char simbolos[] = { '<', '>', '=', '!', '+', '-', '/', '*', '(', ')', '\'', ';', ':' };
+  public static char hexas[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
   public static char brancos[] = { 10, 13, '\n', ' ' };
 
   public boolean isLetra(char ch) {
@@ -39,6 +40,16 @@ public class Caracteres {
   public boolean isBranco(char ch) {
     for (char branco : brancos) {
       if (ch == branco) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public boolean isHexa(char ch) {
+    for (char hexa : hexas) {
+      if (ch == hexa) {
         return true;
       }
     }

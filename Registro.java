@@ -2,11 +2,10 @@
     Classe que será inserida na tabela de simbolos
 */
 
-
 public class Registro {
 
     public Token token;
-    public int tipo;
+    public Tipo tipo;
     public String endereco;
 
     public Registro() {
@@ -16,16 +15,16 @@ public class Registro {
         this.token = token;
     }
 
-    public Registro(Token token, String endereco) {
-        this.token = token;
-        this.endereco = endereco;
-    }
-
-    public Registro(Token token, int tipo, String endereco) {
+    public Registro(Token token, Tipo tipo) {
         this.token = token;
         this.tipo = tipo;
-        this.endereco = endereco;
     }
+
+    // public Registro(Token token, int tipo, String endereco) {
+    // this.token = token;
+    // this.tipo = tipo;
+    // this.endereco = endereco;
+    // }
 
     public Token getToken() {
         return this.token;
@@ -35,11 +34,11 @@ public class Registro {
         this.token = token;
     }
 
-    public int getTipo() {
+    public Tipo getTipo() {
         return this.tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 

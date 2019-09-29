@@ -5,18 +5,35 @@ public class L {
 
   public static void main(String[] args) throws Exception {
     Leitor leitorFonte = new Leitor("teste.txt");
+    AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
 
     inicializarTabela();
 
-    char ch;
-    while ((ch = leitorFonte.getProximoCaractere()) != (char) -1) {
-      System.out.println(ch);
-    }
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
+    al.getProximoRegistro();
   }
 
   public static void inicializarTabela() {
     tabela.adicionarRegistro(new Token(Simbolos.constante, "const"));
-    tabela.adicionarRegistro(new Token(Simbolos.inteiro, "int"));
+    tabela.adicionarRegistro(new Token(Simbolos.inteiro, "integer"));
     tabela.adicionarRegistro(new Token(Simbolos.bit, "byte"));
     tabela.adicionarRegistro(new Token(Simbolos.string, "string"));
     tabela.adicionarRegistro(new Token(Simbolos.enquanto, "while"));
