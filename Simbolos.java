@@ -41,7 +41,7 @@ public class Simbolos {
     public static final byte falso = 33;
     public static final byte booleano = 34;
     public static final byte identificador = 35;
-    public static final byte numero = 36;
+    public static final byte value = 36;
     public static final byte eof = 37;
     
 }
