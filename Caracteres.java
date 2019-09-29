@@ -6,6 +6,7 @@ public class Caracteres {
   public static char simbolos[] = { '<', '>', '=', '!', '+', '-', '/', '*', '(', ')', '\'', ';', ':' };
   public static char hexas[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
   public static char brancos[] = { 10, 13, '\n', ' ' };
+  public static char EOF = '\u001a';
 
   public boolean isLetra(char ch) {
     for (char letra : letras) {

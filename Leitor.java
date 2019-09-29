@@ -12,6 +12,8 @@ public class Leitor {
   private char proximoChar;
   private BufferedReader arquivo;
 
+  public int numeroLinha = 1;
+
   Leitor(String nomeArquivo) throws FileNotFoundException {
     try {
       arquivo = new BufferedReader(new FileReader(nomeArquivo));
@@ -21,12 +23,17 @@ public class Leitor {
   }
 
   public char getProximoCaractere() throws Exception {
-    try{
-      return (char) arquivo.read();
+    try {
+      char ch = (char) arquivo.read();
+      if (ch == '\n') {
+        numeroLinha++;
+      }
+
+      return ch;
     } catch (Exception e) {
       throw e;
     }
-    
+
   }
 
 }

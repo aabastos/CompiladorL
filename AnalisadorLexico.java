@@ -26,6 +26,9 @@ public class AnalisadorLexico {
 
       if (!devolve) {
         proximo = leitor.getProximoCaractere();
+        if (!verificadorCaracteres.isValido(proximo) && proximo != Caracteres.EOF) {
+          throw new Exception(leitor.numeroLinha + ":caractere invalido.");
+        }
       }
       devolve = false;
 
@@ -60,6 +63,12 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else if (proximo == '/') {
           estado = 9;
+        } else {
+          if (proximo != Caracteres.EOF) {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          } else {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+          }
         }
         break;
       case 1:
@@ -70,7 +79,11 @@ public class AnalisadorLexico {
           estado = 12;
           lexema = lexema + proximo;
         } else {
-          throw new Exception("Caractere invalido [" + proximo + "]");
+          if (proximo != Caracteres.EOF) {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          } else {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+          }
         }
         break;
       case 2:
@@ -93,7 +106,11 @@ public class AnalisadorLexico {
           estado = 3;
           lexema = lexema + proximo;
         } else {
-          throw new Exception("Caractere invalido [" + proximo + "]");
+          if (proximo != Caracteres.EOF) {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          } else {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+          }
         }
         break;
       case 5:
@@ -101,15 +118,24 @@ public class AnalisadorLexico {
           estado = 6;
           lexema = lexema + proximo;
         } else {
-          throw new Exception("Caractere invalido [" + proximo + "]");
+          if (proximo != Caracteres.EOF) {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          } else {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+          }
         }
         break;
       case 6:
         if (verificadorCaracteres.isHexa(proximo)) {
           estado = estadoFinal;
           lexema = lexema + proximo;
+          tipoConstante = Tipo.bit;
         } else {
-          throw new Exception("Caractere invalido [" + proximo + "]");
+          if (proximo != Caracteres.EOF) {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          } else {
+            throw new ExcecaoLexica(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+          }
         }
         break;
       case 7:
