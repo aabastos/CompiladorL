@@ -21,7 +21,12 @@ public class Leitor {
   }
 
   public char getProximoCaractere() throws Exception {
-    return (char) arquivo.read();
+    try{
+      return (char) arquivo.read();
+    } catch (Exception e) {
+      throw e;
+    }
+    
   }
 
 }

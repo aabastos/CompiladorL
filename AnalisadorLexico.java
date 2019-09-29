@@ -9,7 +9,7 @@ public class AnalisadorLexico {
     this.verificadorCaracteres = new Caracteres();
   }
 
-  public Registro getProximoRegistro() {
+  public Registro getProximoRegistro() throws Exception{
     String lexema = "";
     Tipo tipoConstante = null;
     int estado = estadoInicial;

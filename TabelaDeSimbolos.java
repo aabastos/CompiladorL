@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class TabelaDeSimbolos {
     
     public ArrayList<Registro> tabelaDeSimbolos;
+    public static Registro registroAtual;
 
     public TabelaDeSimbolos() {
         tabelaDeSimbolos = new ArrayList<Registro>();
