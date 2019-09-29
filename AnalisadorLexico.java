@@ -19,7 +19,6 @@ public class AnalisadorLexico {
     String lexema = "";
     Tipo tipoConstante = null;
     boolean identificador = false;
-    Token token = null;
 
     int estado = estadoInicial;
     while (estado != estadoFinal) {
