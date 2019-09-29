@@ -6,7 +6,7 @@ public class Caracteres {
   public static char simbolos[] = { '<', '>', '=', '!', '+', '-', '/', '*', '(', ')', '\'', ';', ':' };
   public static char brancos[] = { 10, 13, '\n', ' ' };
 
-  public boolean letra(char ch) {
+  public boolean isLetra(char ch) {
     for (char letra : letras) {
       if (ch == letra) {
         return true;
@@ -16,7 +16,7 @@ public class Caracteres {
     return false;
   }
 
-  public boolean simbolo(char ch) {
+  public boolean isSimbolo(char ch) {
     for (char simbolo : simbolos) {
       if (ch == simbolo) {
         return true;
@@ -26,7 +26,7 @@ public class Caracteres {
     return false;
   }
 
-  public boolean digito(char ch) {
+  public boolean isDigito(char ch) {
     for (char digito : digitos) {
       if (ch == digito) {
         return true;
@@ -36,7 +36,7 @@ public class Caracteres {
     return false;
   }
 
-  public boolean branco(char ch) {
+  public boolean isBranco(char ch) {
     for (char branco : brancos) {
       if (ch == branco) {
         return true;
@@ -46,8 +46,8 @@ public class Caracteres {
     return false;
   }
 
-  public boolean valido(char ch) {
-    return (letra(ch) || digito(ch) || simbolo(ch) || branco(ch));
+  public boolean isValido(char ch) {
+    return (isLetra(ch) || isDigito(ch) || isSimbolo(ch) || isBranco(ch));
   }
 
 }

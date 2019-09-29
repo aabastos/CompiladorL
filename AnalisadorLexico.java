@@ -19,7 +19,7 @@ public class AnalisadorLexico {
 
       switch (estado) {
       case 0:
-        if (verificadorCaracteres.letra(proximo)) {
+        if (verificadorCaracteres.isLetra(proximo)) {
           estado = 3;
           lexema = lexema + proximo;
         }

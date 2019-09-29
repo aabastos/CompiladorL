@@ -5,28 +5,34 @@
 
 public class Registro {
 
-    public int simbolo;
+    public Token token;
     public int tipo;
-    public String lexema;
     public String endereco;
 
     public Registro() {
-
     }
 
-    public Registro(int simbolo, int tipo, String lexema, String endereco) {
-        this.simbolo = simbolo;
-        this.tipo = tipo;
-        this.lexema = lexema;
+    public Registro(Token token) {
+        this.token = token;
+    }
+
+    public Registro(Token token, String endereco) {
+        this.token = token;
         this.endereco = endereco;
     }
 
-    public int getSimbolo() {
-        return this.simbolo;
+    public Registro(Token token, int tipo, String endereco) {
+        this.token = token;
+        this.tipo = tipo;
+        this.endereco = endereco;
     }
 
-    public void setSimbolo(int simbolo) {
-        this.simbolo = simbolo;
+    public Token getToken() {
+        return this.token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
     }
 
     public int getTipo() {
@@ -35,14 +41,6 @@ public class Registro {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
-    }
-
-    public String getLexema() {
-        return lexema;
-    }
-
-    public void setLexema(String lexema) {
-        this.lexema = lexema;
     }
 
     public String getEndereco() {

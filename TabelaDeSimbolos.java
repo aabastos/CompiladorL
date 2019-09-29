@@ -12,8 +12,12 @@ public class TabelaDeSimbolos {
         tabelaDeSimbolos = new ArrayList<Registro>();
     }
 
-    public void adicionarSimbolo(int simbolo, int tipo, String lexema, String endereco) {
-        tabelaDeSimbolos.add(new Registro(simbolo, tipo, lexema, endereco));
+    public void adicionarRegistro(Token token) {
+        tabelaDeSimbolos.add(new Registro(token));
+    }
+
+    public void adicionarRegistro(Token token, int tipo, String endereco) {
+        tabelaDeSimbolos.add(new Registro(token, tipo, endereco));
     }
 
     public void removerSimbolo(Registro registro) {
@@ -26,7 +30,7 @@ public class TabelaDeSimbolos {
 
     public int buscarSimbolo(String lexema) {
         for (Registro registro : tabelaDeSimbolos) {
-            if(registro.lexema.equals(lexema)){
+            if(registro.token.lexema.equals(lexema)){
                 return tabelaDeSimbolos.indexOf(registro);
             }
         }
