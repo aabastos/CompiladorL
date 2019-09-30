@@ -8,27 +8,6 @@ public class L {
     AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
 
     inicializarTabela();
-
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
-    al.getProximoRegistro();
   }
 
   public static void inicializarTabela() {
@@ -49,6 +28,8 @@ public class L {
     tabela.adicionarRegistro(new Token(Simbolos.diferente, "!="));
     tabela.adicionarRegistro(new Token(Simbolos.maiorOuIgual, ">="));
     tabela.adicionarRegistro(new Token(Simbolos.menorOuIgual, "<="));
+    tabela.adicionarRegistro(new Token(Simbolos.menor, "<"));
+    tabela.adicionarRegistro(new Token(Simbolos.maior, ">"));
     tabela.adicionarRegistro(new Token(Simbolos.virgula, ","));
     tabela.adicionarRegistro(new Token(Simbolos.mais, "+"));
     tabela.adicionarRegistro(new Token(Simbolos.menos, "-"));
