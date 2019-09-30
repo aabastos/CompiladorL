@@ -3,9 +3,9 @@ public class Caracteres {
       'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
       'u', 'U', 'v', 'V', 'w', 'W', 'x', 'X', 'y', 'Y', 'z', 'Z' };
   public static char digitos[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-  public static char simbolos[] = { '<', '>', '=', '!', '+', '-', '/', '*', '(', ')', '\'', ';', ':' };
+  public static char simbolos[] = { '<', '>', '=', '!', '+', '-', '/', '*', '(', ')', '\'', ';', ':', '_', ',', '?' };
   public static char hexas[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
-  public static char brancos[] = { 10, 13, '\n', ' ' };
+  public static char brancos[] = { 10, 13, 65535, '\n', ' ' };
   public static char EOF = '\u001a';
 
   public boolean isLetra(char ch) {
@@ -59,7 +59,7 @@ public class Caracteres {
   }
 
   public boolean isValido(char ch) {
-    return (isLetra(ch) || isDigito(ch) || isSimbolo(ch) || isBranco(ch));
+    return (isLetra(ch) || isDigito(ch) || isSimbolo(ch) || isBranco(ch)) || ch == EOF;
   }
 
 }
