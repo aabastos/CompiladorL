@@ -25,8 +25,13 @@ public class Leitor {
   public char getProximoCaractere() throws Exception {
     try {
       char ch = (char) arquivo.read();
+
       if (ch == '\n') {
         numeroLinha++;
+      }
+
+      if ((int) ch == 65535) {
+        ch = Caracteres.EOF;
       }
 
       return ch;

@@ -62,6 +62,9 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else if (proximo == '/') {
           estado = 9;
+        } else if (proximo == Caracteres.EOF) {
+          estado = estadoFinal;
+          lexema = lexema + proximo;
         } else {
           if (proximo != Caracteres.EOF) {
             throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
@@ -229,7 +232,8 @@ public class AnalisadorLexico {
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));
     }
 
-    // System.out.println("Simbolo: " + registroAtual.token.getSimbolo() + " /
-    // Lexema: " + registroAtual.token.getLexema());
+    // System.out
+    // .println("Simbolo: " + registroAtual.token.getSimbolo() + " / Lexema: " +
+    // registroAtual.token.getLexema());
   }
 }

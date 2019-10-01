@@ -43,7 +43,7 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.abreParenteses
                 || lexico.registroAtual.token.simbolo == Simbolos.pontoEVirgula);
 
-        // casaToken(Simbolos.fim);
+        casaToken(Simbolos.fim);
     }
 
     public void De() throws Exception {
