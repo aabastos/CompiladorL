@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class L {
 
   public static TabelaDeSimbolos tabela = new TabelaDeSimbolos();
@@ -5,7 +7,7 @@ public class L {
   public static void main(String[] args) throws Exception {
     inicializarTabela();
 
-    Leitor leitorFonte = new Leitor("teste.txt");
+    Leitor leitorFonte = new Leitor(args[0]);
     AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
     AnalisadorSintatico as = new AnalisadorSintatico(al);
 

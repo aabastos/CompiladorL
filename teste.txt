@@ -1,19 +1,16 @@
-/* Exemplo de Programa na linguagem L */
+/**
+ * Teste const comecando com zero
+ */
+ integer n;
+ const num=0123;
 
-integer n;
-string nome;
-boolean naoTerminou;
-const MAXITER=10;
-
-/* Programa Principal */
-main
-  write('Digite seu nome: ');
-  readln(nome);
-  naoTerminou=true;
-  n=0;
-  while (naoTerminou) begin
-    writeln('Ola'' ',nome);
-    n=n+1;
-    naoTerminou=n<MAXITER;
-  end
-end
+ /******************************/
+ main
+    writeln('Digite um numero maior que zero: ');
+    readln(n);
+    while(n > 0) begin
+        if(n/2 == (n-1)/2) then writeln('Numero impar: ', n);
+        else writeln('Numero par: ', n);
+        n=n-1;
+    end
+ end
