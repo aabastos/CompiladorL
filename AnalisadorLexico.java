@@ -62,9 +62,6 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else if (proximo == '/') {
           estado = 9;
-        } else if (proximo == Caracteres.EOF) {
-          estado = estadoFinal;
-          lexema = lexema + proximo;
         } else {
           if (proximo != Caracteres.EOF) {
             throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
@@ -100,8 +97,12 @@ public class AnalisadorLexico {
           estado = 3;
           lexema = lexema + proximo;
         } else {
+          if (lexema.equals("true") || lexema.equals("false"))
+            tipoConstante = Tipo.booleano;
+          else
+            identificador = true;
+
           estado = estadoFinal;
-          identificador = true;
           devolve = true;
         }
         break;

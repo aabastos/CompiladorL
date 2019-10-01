@@ -11,8 +11,13 @@ public class AnalisadorSintatico {
         if (lexico.registroAtual.token.simbolo == simbolo) {
             lexico.getProximoRegistro();
         } else {
-            throw new Exception(
-                    lexico.leitor.numeroLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
+            int numLinha = lexico.leitor.numeroLinha;
+
+            if (lexico.registroAtual.token.simbolo == Simbolos.eof) {
+                throw new Exception(numLinha + ":fim de arquivo nao esperado.");
+            } else {
+                throw new Exception(numLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
+            }
         }
     }
 
@@ -38,7 +43,7 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.abreParenteses
                 || lexico.registroAtual.token.simbolo == Simbolos.pontoEVirgula);
 
-        casaToken(Simbolos.fim);
+        // casaToken(Simbolos.fim);
     }
 
     public void De() throws Exception {

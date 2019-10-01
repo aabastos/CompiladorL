@@ -46,8 +46,8 @@ public class L {
     tabela.adicionarRegistro(new Token(Simbolos.principal, "main"));
     tabela.adicionarRegistro(new Token(Simbolos.escrever, "write"));
     tabela.adicionarRegistro(new Token(Simbolos.escreverLinha, "writeln"));
-    tabela.adicionarRegistro(new Token(Simbolos.verdadeiro, "true"));
-    tabela.adicionarRegistro(new Token(Simbolos.falso, "false"));
+    tabela.adicionarRegistro(new Token(Simbolos.value, "true"));
+    tabela.adicionarRegistro(new Token(Simbolos.value, "false"));
     tabela.adicionarRegistro(new Token(Simbolos.booleano, "boolean"));
     tabela.adicionarRegistro(new Token(Simbolos.eof, Caracteres.EOF + ""));
 
