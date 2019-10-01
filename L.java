@@ -3,11 +3,11 @@ public class L {
   public static TabelaDeSimbolos tabela = new TabelaDeSimbolos();
 
   public static void main(String[] args) throws Exception {
+    inicializarTabela();
+
     Leitor leitorFonte = new Leitor("teste.txt");
     AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
     AnalisadorSintatico as = new AnalisadorSintatico(al);
-
-    inicializarTabela();
 
     // al.getProximoRegistro();
     as.S();

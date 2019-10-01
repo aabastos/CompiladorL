@@ -12,7 +12,7 @@ public class AnalisadorSintatico {
             lexico.getProximoRegistro();
         } else {
             throw new Exception(
-                    lexico.leitor.numeroLinha + ": Token nao esperado = " + lexico.registroAtual.token.simbolo);
+                    lexico.leitor.numeroLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
         }
     }
 
