@@ -1,13 +1,16 @@
 public class L {
 
   public static TabelaDeSimbolos tabela = new TabelaDeSimbolos();
-  public static final char EOF = '\u001a';
 
   public static void main(String[] args) throws Exception {
     Leitor leitorFonte = new Leitor("teste.txt");
     AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
+    AnalisadorSintatico as = new AnalisadorSintatico(al);
 
     inicializarTabela();
+
+    al.getProximoRegistro();
+    as.S();
   }
 
   public static void inicializarTabela() {
@@ -46,7 +49,7 @@ public class L {
     tabela.adicionarRegistro(new Token(Simbolos.verdadeiro, "true"));
     tabela.adicionarRegistro(new Token(Simbolos.falso, "false"));
     tabela.adicionarRegistro(new Token(Simbolos.booleano, "boolean"));
-    tabela.adicionarRegistro(new Token(Simbolos.eof, "" + EOF));
+    tabela.adicionarRegistro(new Token(Simbolos.eof, Caracteres.EOF + ""));
 
   }
 

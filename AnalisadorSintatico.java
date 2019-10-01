@@ -8,32 +8,19 @@ public class AnalisadorSintatico {
 
     public void casaToken(byte simbolo) throws Exception{
         if(lexico.registroAtual.token.simbolo == simbolo){
-            //chamar o analisador lexico
+            lexico.getProximoRegistro();
         } else {
             throw new Exception("Token não esperado = " + lexico.registroAtual.token.simbolo);
         }
     }
 
-    public void S() {
+    public void S()  throws Exception {
         while (lexico.registroAtual.token.simbolo == Simbolos.inteiro || 
                 lexico.registroAtual.token.simbolo == Simbolos.booleano || 
                 lexico.registroAtual.token.simbolo == Simbolos.bit ||
                 lexico.registroAtual.token.simbolo == Simbolos.string ||
                 lexico.registroAtual.token.simbolo == Simbolos.constante) {
-            //Tirar o if e else e deixar somente o De()
-            //Lembrar de criar o método De()
-            if(lexico.registroAtual.token.simbolo == Simbolos.inteiro || 
-                    lexico.registroAtual.token.simbolo == Simbolos.booleano || 
-                    lexico.registroAtual.token.simbolo == Simbolos.bit ||
-                    lexico.registroAtual.token.simbolo == Simbolos.string) {
                 De();
-            } else {
-                casaToken(Simbolos.constante);
-                casaToken(Simbolos.identificador);
-                casaToken(Simbolos.igual);
-                casaToken(Simbolos.value);
-                casaToken(Simbolos.pontoEVirgula);
-            }
         }
 
         casaToken(Simbolos.principal);
@@ -49,24 +36,45 @@ public class AnalisadorSintatico {
                 lexico.registroAtual.token.simbolo == Simbolos.abreParenteses ||
                 lexico.registroAtual.token.simbolo == Simbolos.pontoEVirgula
         );
+
+        casaToken(Simbolos.fim);
     }
 
-    public void T(){
+    public void De() throws Exception {
+        if(lexico.registroAtual.token.simbolo == Simbolos.inteiro || 
+                lexico.registroAtual.token.simbolo == Simbolos.booleano || 
+                lexico.registroAtual.token.simbolo == Simbolos.bit ||
+                lexico.registroAtual.token.simbolo == Simbolos.string) {
+                T();
+                V();
+                while(lexico.registroAtual.token.simbolo == Simbolos.virgula){
+                    casaToken(Simbolos.virgula);
+                    V();
+                }
+                casaToken(Simbolos.pontoEVirgula);
+                
+        } else {
+            casaToken(Simbolos.constante);
+            casaToken(Simbolos.identificador);
+            casaToken(Simbolos.igual);
+            casaToken(Simbolos.value);
+            casaToken(Simbolos.pontoEVirgula);
+        }
+    }
+
+    public void T() throws Exception {
         if(lexico.registroAtual.token.simbolo == Simbolos.inteiro){
             casaToken(Simbolos.inteiro);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.booleano){
+        } else if(lexico.registroAtual.token.simbolo == Simbolos.booleano){
             casaToken(Simbolos.booleano);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.bit){
+        } else if(lexico.registroAtual.token.simbolo == Simbolos.bit){
             casaToken(Simbolos.bit);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.string){
+        } else {
             casaToken(Simbolos.string);
         }  
     }
 
-    public void V(){
+    public void V() throws Exception {
         if(lexico.registroAtual.token.simbolo == Simbolos.identificador){
             casaToken(Simbolos.identificador);
         }
@@ -76,7 +84,7 @@ public class AnalisadorSintatico {
         }
     }
 
-    public void C() throws Exception{
+    public void C() throws Exception {
         if(lexico.registroAtual.token.simbolo == Simbolos.identificador) {
             casaToken(Simbolos.identificador);
             casaToken(Simbolos.igual);
@@ -191,17 +199,24 @@ public class AnalisadorSintatico {
         }
     }
     //duvida
-    public void E(){
-        if(lexico.registroAtual.token.simbolo == Simbolos.escrever){
+    public void E() throws Exception {
+        if(lexico.registroAtual.token.simbolo == Simbolos.escrever) {
             casaToken(Simbolos.escrever);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.escreverLinha){
+        } else if(lexico.registroAtual.token.simbolo == Simbolos.escreverLinha) {
             casaToken(Simbolos.escreverLinha);
         }
+        casaToken(Simbolos.abreParenteses);
+        Exp();
+        while (lexico.registroAtual.token.simbolo == Simbolos.virgula) {
+            casaToken(Simbolos.virgula);
+            Exp();
+        }
+        casaToken(Simbolos.fechaParenteses);
+        casaToken(Simbolos.pontoEVirgula);
 
     }
 
-    public void Exp(){
+    public void Exp() throws Exception {
         X();
         while (lexico.registroAtual.token.simbolo == Simbolos.igualIgual || 
                 lexico.registroAtual.token.simbolo == Simbolos.diferente || 
@@ -211,32 +226,29 @@ public class AnalisadorSintatico {
                 lexico.registroAtual.token.simbolo == Simbolos.maiorOuIgual){
             if(lexico.registroAtual.token.simbolo == Simbolos.igualIgual){
                 casaToken(Simbolos.igualIgual);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.diferente){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.diferente){
                 casaToken(Simbolos.diferente);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.menor){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.menor){
                 casaToken(Simbolos.menor);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.maior){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.maior){
                 casaToken(Simbolos.maior);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.menorOuIgual){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.menorOuIgual){
                 casaToken(Simbolos.menorOuIgual);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.maiorOuIgual){
+            } else {
                 casaToken(Simbolos.maiorOuIgual);
             }
-        X();
+            X();
         }
     }
 
-    public void X(){
-        if(lexico.registroAtual.token.simbolo == Simbolos.mais){
-            casaToken(Simbolos.mais);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.menos){
-            casaToken(Simbolos.menos);
+    public void X() throws Exception {
+        if (lexico.registroAtual.token.simbolo == Simbolos.mais || 
+            lexico.registroAtual.token.simbolo == Simbolos.menos) {
+            if(lexico.registroAtual.token.simbolo == Simbolos.mais){
+                casaToken(Simbolos.mais);
+            } else {
+                casaToken(Simbolos.menos);
+            }
         }
         Y();
         while (lexico.registroAtual.token.simbolo == Simbolos.mais || 
@@ -244,48 +256,41 @@ public class AnalisadorSintatico {
                 lexico.registroAtual.token.simbolo == Simbolos.ou){
             if(lexico.registroAtual.token.simbolo == Simbolos.mais){
                 casaToken(Simbolos.mais);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.menos){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.menos){
                 casaToken(Simbolos.menos);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.ou){
+            } else {
                 casaToken(Simbolos.ou);
             }
             Y();
         }
     }
 
-    public void Y(){
+    public void Y() throws Exception {
         Z();
         while (lexico.registroAtual.token.simbolo == Simbolos.multiplicacao || 
                 lexico.registroAtual.token.simbolo == Simbolos.divisao || 
                 lexico.registroAtual.token.simbolo == Simbolos.e){
             if(lexico.registroAtual.token.simbolo == Simbolos.multiplicacao){
                 casaToken(Simbolos.multiplicacao);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.divisao){
+            } else if(lexico.registroAtual.token.simbolo == Simbolos.divisao){
                 casaToken(Simbolos.divisao);
-            }
-            else if(lexico.registroAtual.token.simbolo == Simbolos.e){
+            } else {
                 casaToken(Simbolos.e);
             }
         Z();
         }
     }
 
-    public void Z(){
+    public void Z() throws Exception {
         if(lexico.registroAtual.token.simbolo == Simbolos.identificador){
             casaToken(Simbolos.identificador);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.value){
+        } else if(lexico.registroAtual.token.simbolo == Simbolos.value){
             casaToken(Simbolos.value);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.abreParenteses){
+        } else if(lexico.registroAtual.token.simbolo == Simbolos.abreParenteses){
             casaToken(Simbolos.abreParenteses);
             Exp();
             casaToken(Simbolos.fechaParenteses);
-        }
-        else if(lexico.registroAtual.token.simbolo == Simbolos.nao){
+        } else {
             casaToken(Simbolos.nao);
             Exp();
         }
