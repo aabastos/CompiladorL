@@ -44,6 +44,7 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.pontoEVirgula);
 
         casaToken(Simbolos.fim);
+        casaToken(Simbolos.eof);
     }
 
     public void De() throws Exception {
