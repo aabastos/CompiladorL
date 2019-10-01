@@ -9,7 +9,7 @@ public class L {
 
     inicializarTabela();
 
-    al.getProximoRegistro();
+    // al.getProximoRegistro();
     as.S();
   }
 

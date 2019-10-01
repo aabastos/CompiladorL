@@ -2,9 +2,8 @@
     Classe que possui constantes para todos os símbolos e palavras reservadas
 */
 
-
 public class Simbolos {
-    
+
     public static final byte constante = 0;
     public static final byte inteiro = 1;
     public static final byte bit = 2;
@@ -43,5 +42,5 @@ public class Simbolos {
     public static final byte identificador = 35;
     public static final byte value = 36;
     public static final byte eof = 37;
-    
+
 }
