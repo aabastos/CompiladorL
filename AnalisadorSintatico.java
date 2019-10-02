@@ -14,9 +14,11 @@ public class AnalisadorSintatico {
             int numLinha = lexico.leitor.numeroLinha;
 
             if (lexico.registroAtual.token.simbolo == Simbolos.eof) {
-                throw new Exception(numLinha + ":fim de arquivo nao esperado.");
+                System.out.println(numLinha + ":fim de arquivo nao esperado.");
+                System.exit(1);
             } else {
-                throw new Exception(numLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
+                System.out.println(numLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
+                System.exit(1);
             }
         }
     }

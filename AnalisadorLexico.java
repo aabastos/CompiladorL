@@ -26,7 +26,8 @@ public class AnalisadorLexico {
       if (!devolve) {
         proximo = leitor.getProximoCaractere();
         if (!verificadorCaracteres.isValido(proximo) && proximo != Caracteres.EOF) {
-          throw new Exception(leitor.numeroLinha + ":caractere invalido.");
+          System.out.println(leitor.numeroLinha + ":caractere invalido.[" + (int) proximo + "]");
+          System.exit(1);
         }
       }
       devolve = false;
@@ -44,12 +45,9 @@ public class AnalisadorLexico {
         } else if (verificadorCaracteres.isLetra(proximo)) {
           estado = 3;
           lexema = lexema + proximo;
-        } else if (proximo == '+' || proximo == '*' || proximo == '(' || proximo == ')' || proximo == ','
-            || proximo == ';') {
+        } else if (proximo == '+' || proximo == '-' || proximo == '*' || proximo == '(' || proximo == ')'
+            || proximo == ',' || proximo == ';') {
           estado = estadoFinal;
-          lexema = lexema + proximo;
-        } else if (proximo == '-') {
-          estado = 13;
           lexema = lexema + proximo;
         } else if (verificadorCaracteres.isDigito(proximo)) {
           estado = 12;
@@ -67,9 +65,11 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else {
           if (proximo != Caracteres.EOF) {
-            throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.out.println(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.exit(1);
           } else {
-            throw new Exception(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.out.println(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.exit(1);
           }
         }
         break;
@@ -118,9 +118,11 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else {
           if (proximo != Caracteres.EOF) {
-            throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.out.println(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.exit(1);
           } else {
-            throw new Exception(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.out.println(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.exit(1);
           }
         }
         break;
@@ -130,9 +132,11 @@ public class AnalisadorLexico {
           lexema = lexema + proximo;
         } else {
           if (proximo != Caracteres.EOF) {
-            throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.out.println(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.exit(1);
           } else {
-            throw new Exception(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.out.println(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.exit(1);
           }
         }
         break;
@@ -143,9 +147,11 @@ public class AnalisadorLexico {
           tipoConstante = Tipo.bit;
         } else {
           if (proximo != Caracteres.EOF) {
-            throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.out.println(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+            System.exit(1);
           } else {
-            throw new Exception(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.out.println(leitor.numeroLinha + ":fim de arquivo nao esperado.");
+            System.exit(1);
           }
         }
         break;
@@ -188,7 +194,8 @@ public class AnalisadorLexico {
           estado = 12;
           lexema = lexema + proximo;
         } else if (verificadorCaracteres.isLetra(proximo)) {
-          throw new Exception(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          System.out.println(leitor.numeroLinha + ":lexema nao identificado [" + lexema + "].");
+          System.exit(1);
         } else {
           estado = estadoFinal;
           tipoConstante = Tipo.inteiro;
