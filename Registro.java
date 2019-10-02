@@ -1,5 +1,9 @@
-/*
-    Classe que será inserida na tabela de simbolos
+/*Trabalho de Compiladores Versão 1
+ *Alunos: André Albino
+ *        João Pedro
+ *        Vitor Fernandes
+ *
+ *  Classe que será inserida na tabela de simbolos
 */
 
 public class Registro {

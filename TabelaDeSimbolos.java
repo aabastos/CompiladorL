@@ -1,8 +1,13 @@
+/*Trabalho de Compiladores Versão 1
+ *Alunos: André Albino
+ *        João Pedro
+ *        Vitor Fernandes
+ *
+ *   Classe da tabela de simbolos
+*/
+
 import java.util.ArrayList;
 
-/*
-    Classe da tabela de simbolos
-*/
 
 public class TabelaDeSimbolos {
 

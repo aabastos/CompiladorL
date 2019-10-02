@@ -1,5 +1,8 @@
-/*
-    Classe que possui constantes para todos os símbolos e palavras reservadas
+/*Trabalho de Compiladores Versão 1
+ *Alunos: André Albino
+ *        João Pedro
+ *        Vitor Fernandes
+ *  Classe que possui constantes para todos os símbolos e palavras reservadas
 */
 
 public class Simbolos {

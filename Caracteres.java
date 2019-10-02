@@ -1,3 +1,8 @@
+/*Trabalho de Compiladores Versão 1
+ *Alunos: André Albino
+ *        João Pedro
+ *        Vitor Fernandes
+*/
 public class Caracteres {
   public static char letras[] = { 'a', 'A', 'b', 'B', 'c', 'C', 'd', 'D', 'e', 'E', 'f', 'F', 'g', 'G', 'h', 'H', 'i',
       'I', 'j', 'J', 'k', 'K', 'l', 'L', 'm', 'M', 'n', 'N', 'o', 'O', 'p', 'P', 'q', 'Q', 'r', 'R', 's', 'S', 't', 'T',
