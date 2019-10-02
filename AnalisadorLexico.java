@@ -1,3 +1,8 @@
+/*Trabalho de Compiladores Versão 1
+ *Alunos: André Albino
+ *        João Pedro
+ *        Vitor Fernandes
+*/
 public class AnalisadorLexico {
   public Registro registroAtual;
   public Leitor leitor;
