@@ -66,6 +66,12 @@ public class AnalisadorSintatico {
             casaToken(Simbolos.constante);
             casaToken(Simbolos.identificador);
             casaToken(Simbolos.igual);
+
+            if (lexico.registroAtual.token.simbolo == Simbolos.mais)
+                casaToken(Simbolos.mais);
+            else if (lexico.registroAtual.token.simbolo == Simbolos.menos)
+                casaToken(Simbolos.menos);
+
             casaToken(Simbolos.value);
             casaToken(Simbolos.pontoEVirgula);
         }
@@ -89,6 +95,12 @@ public class AnalisadorSintatico {
         }
         if (lexico.registroAtual.token.simbolo == Simbolos.igual) {
             casaToken(Simbolos.igual);
+
+            if (lexico.registroAtual.token.simbolo == Simbolos.mais)
+                casaToken(Simbolos.mais);
+            else if (lexico.registroAtual.token.simbolo == Simbolos.menos)
+                casaToken(Simbolos.menos);
+
             casaToken(Simbolos.value);
         }
     }
