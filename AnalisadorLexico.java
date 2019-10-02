@@ -26,7 +26,7 @@ public class AnalisadorLexico {
       if (!devolve) {
         proximo = leitor.getProximoCaractere();
         if (!verificadorCaracteres.isValido(proximo) && proximo != Caracteres.EOF) {
-          System.out.println(leitor.numeroLinha + ":caractere invalido.[" + (int) proximo + "]");
+          System.out.println(leitor.numeroLinha + ":caractere invalido.[" + proximo + "]");
           System.exit(1);
         }
       }
