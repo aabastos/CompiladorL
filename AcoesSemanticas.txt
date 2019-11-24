@@ -1,0 +1,71 @@
+(1)   { T.tipo := inteiro }
+(2)   { T.tipo := booleano  }
+(3)   { T.tipo := byte  }
+(4)   { T.tipo := arranjo(0, 255, caractere)  }
+(5)   { V.tipo := T.tipo  }
+(6)   { V1.tipo := T.tipo }
+(7)   { se id.classe != vazio
+          ERRO
+        senao
+          se value.tipo != V.tipo
+            ERRO
+          senao
+            id.classe := variavel
+            id.tipo := V.tipo
+      }
+(8)   { se id.classe != vazio
+          ERRO
+        senao
+          id.classe := constante
+          id.tipo := value.tipo
+      }
+(9)   { se id.classe != variavel
+          ERRO
+        senao
+          se id.tipo != Exp.tipo
+            ERRO
+      }
+(10)  { se Exp.tipo != booleano
+          ERRO
+      }
+(11)  { se id.classe != variavel
+          ERRO
+      }
+(12)  { se id.classe == vazio
+          ERRO
+        senao
+          Z.tipo := id.tipo
+      }
+(13)  { Z.tipo := value.tipo  }
+(14)  { Z.tipo := Exp.tipo  }
+(15)  { Y.tipo := Z.tipo  }
+(16)  { se Y.tipo != booleano 
+          ERRO
+      }
+(17)  { se Y.tipo != Z1.tipo
+          ERRO
+        senao
+          se Z1.tipo == arranjo(0, 255, caractere)
+            ERRO
+      }
+(18)  { X.sinal := verdadeiro }
+(19)  { se X.sinal == verdadeiro 
+          se Y.tipo == arranjo(0, 255, caractere) || Y.tipo == booleano
+            ERRO
+          senao
+            X.tipo := Y.tipo
+        senao
+          X.tipo := Y.tipo
+      }
+(20)  { se X.tipo == booleano
+          ERRO
+      }
+(21)  {se X.tipo != inteiro && X.tipo != byte
+        ERRO
+      }
+(22)  { se X.tipo != booleano
+        ERRO
+      }
+(23)  { se X.tipo != Y1.tipo
+          ERRO
+      }

@@ -1,0 +1,14 @@
+  S -> {De} main {C}+ end
+ De -> T V (5) {, V1 (6)}; | const id = value (8);
+  T -> integer (1) | boolean (2) | byte (3) | string (4)
+  V -> id [= value] (7)
+  C -> id = Exp; (9)| 
+       while "(" Exp (10) ")" (C | begin {C} end) | 
+       if "(" Exp (10) ")" then (C | begin {C}+ end) [else (C | begin {C}+ end)] | 
+       readln "(" id (11) ")"; | 
+       (write | writeln) "(" Exp {, Exp} ")"; | 
+       ;
+Exp -> X {( == | != | < | > | <= | >=) X}
+  X -> [+ (18) | - (18) ] Y (19) {(+ (20) | - (21) | or (22) ) Y1 (23)}
+  Y -> Z (15) {(* | / | and (16) ) Z1 (17)}
+  Z -> id (12) | value (13) | "(" Exp ")" (14) | not Exp (10)
