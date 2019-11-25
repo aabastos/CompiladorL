@@ -12,18 +12,24 @@ public class AnalisadorSintatico {
         lexico.getProximoRegistro();
     }
 
-    public void casaToken(byte simbolo) throws Exception {
+    public Registro casaToken(byte simbolo) throws Exception {
         if (lexico.registroAtual.token.simbolo == simbolo) {
+            Registro registro = lexico.registroAtual;
             lexico.getProximoRegistro();
+            return registro;
         } else {
             int numLinha = lexico.leitor.numeroLinha;
 
             if (lexico.registroAtual.token.simbolo == Simbolos.eof) {
                 System.out.println(numLinha + ":fim de arquivo nao esperado.");
                 System.exit(1);
+
+                return null;
             } else {
                 System.out.println(numLinha + ": Token nao esperado = " + lexico.registroAtual.token.lexema);
                 System.exit(1);
+
+                return null;
             }
         }
     }
@@ -59,7 +65,7 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.booleano
                 || lexico.registroAtual.token.simbolo == Simbolos.bit
                 || lexico.registroAtual.token.simbolo == Simbolos.string) {
-            T();
+            RegraT regraT = T();
             V();
             while (lexico.registroAtual.token.simbolo == Simbolos.virgula) {
                 casaToken(Simbolos.virgula);
@@ -82,22 +88,41 @@ public class AnalisadorSintatico {
         }
     }
 
-    public void T() throws Exception {
+    public RegraT T() throws Exception {
+        RegraT regraT = new RegraT();
+
         if (lexico.registroAtual.token.simbolo == Simbolos.inteiro) {
             casaToken(Simbolos.inteiro);
+            regraT.tipo = Tipo.inteiro;
         } else if (lexico.registroAtual.token.simbolo == Simbolos.booleano) {
             casaToken(Simbolos.booleano);
+            regraT.tipo = Tipo.booleano;
         } else if (lexico.registroAtual.token.simbolo == Simbolos.bit) {
             casaToken(Simbolos.bit);
+            regraT.tipo = Tipo.bit;
         } else {
             casaToken(Simbolos.string);
+            regraT.tipo = Tipo.string;
         }
+
+        return regraT;
     }
 
-    public void V() throws Exception {
+    public void V(Tipo tipo) throws Exception {
+        Registro identificador;
         if (lexico.registroAtual.token.simbolo == Simbolos.identificador) {
-            casaToken(Simbolos.identificador);
+            identificador = casaToken(Simbolos.identificador);
         }
+
+        if (identificador.token.classe != Classe.vazio) {
+            /**
+             * Printar erro
+             */
+        } else {
+            identificador.token.classe = Classe.variavel;
+            identificador.token.tipo = tipo;
+        }
+
         if (lexico.registroAtual.token.simbolo == Simbolos.igual) {
             casaToken(Simbolos.igual);
 
@@ -106,7 +131,12 @@ public class AnalisadorSintatico {
             else if (lexico.registroAtual.token.simbolo == Simbolos.menos)
                 casaToken(Simbolos.menos);
 
-            casaToken(Simbolos.value);
+            Registro valor = casaToken(Simbolos.value);
+            if (valor.token.tipo != identificador.token.tipo) {
+                /**
+                 * Printar erro
+                 */
+            }
         }
     }
 
@@ -322,4 +352,8 @@ public class AnalisadorSintatico {
             Exp();
         }
     }
+}
+
+class RegraT {
+    public Tipo tipo;
 }
