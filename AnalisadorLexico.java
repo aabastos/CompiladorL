@@ -232,13 +232,13 @@ public class AnalisadorLexico {
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));
     } else if (identificador == true && tipoConstante == null) {
       if (tabelaDeSimbolos.buscarSimbolo(lexema) == -1) {
-        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.identificador, lexema));
+        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.identificador, lexema, Classe.tipo_vazio, ""));
       }
 
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));
     } else if (tipoConstante != null) {
       if (tabelaDeSimbolos.buscarSimbolo(lexema) == -1) {
-        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.value, lexema), tipoConstante);
+        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.value, lexema, tipoConstante));
       }
 
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));

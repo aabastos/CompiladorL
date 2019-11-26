@@ -13,7 +13,7 @@ public class L {
 
     Leitor leitorFonte = new Leitor(args[0]);
     AnalisadorLexico al = new AnalisadorLexico(leitorFonte, tabela);
-    AnalisadorSintatico as = new AnalisadorSintatico(al);
+    AnalisadorSintatico as = new AnalisadorSintatico(al, tabela);
 
     // al.getProximoRegistro();
     as.S();

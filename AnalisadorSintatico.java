@@ -8,8 +8,9 @@ public class AnalisadorSintatico {
     public AnalisadorLexico lexico;
     public TabelaDeSimbolos tabela;
 
-    public AnalisadorSintatico(AnalisadorLexico lexico) throws Exception {
+    public AnalisadorSintatico(AnalisadorLexico lexico, TabelaDeSimbolos tabela) throws Exception {
         this.lexico = lexico;
+        this.tabela = tabela;
         lexico.getProximoRegistro();
     }
 
@@ -17,7 +18,7 @@ public class AnalisadorSintatico {
         if (lexico.registroAtual.token.simbolo == simbolo) {
             Registro registro = lexico.registroAtual;
             lexico.getProximoRegistro();
-        
+
             return registro;
         } else {
             int numLinha = lexico.leitor.numeroLinha;
@@ -85,12 +86,12 @@ public class AnalisadorSintatico {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
 
-            if (identificador.classe != Classe.tipo_vazio) {
+            if (identificador.token.classe != Classe.tipo_vazio) {
                 /**
                  * Printar erro
                  */
             } else {
-                identificador.classe = Classe.constante;
+                identificador.token.classe = Classe.constante;
                 tabela.tabelaDeSimbolos.add(index, identificador);
             }
 
@@ -102,7 +103,7 @@ public class AnalisadorSintatico {
                 casaToken(Simbolos.menos);
 
             Registro valor = casaToken(Simbolos.value);
-            identificador.tipo = valor.tipo;
+            identificador.tipo = valor.token.tipo;
             tabela.tabelaDeSimbolos.add(index, identificador);
             casaToken(Simbolos.pontoEVirgula);
         }
@@ -141,14 +142,11 @@ public class AnalisadorSintatico {
             identificador = tabela.tabelaDeSimbolos.get(index);
         }
 
-        if (identificador.classe != Classe.tipo_vazio) {
-            /**
-             * Printar erro
-             */
+        if (identificador.token.classe != Classe.tipo_vazio) {
+            System.out.println("CLASSE VAZIA");
         } else {
-            identificador.classe = Classe.variavel;
-            identificador.tipo = tipo;
-            tabela.tabelaDeSimbolos.add(index, identificador);
+            identificador.token.classe = Classe.variavel;
+            identificador.token.tipo = tipo;
             regraV.tipo = tipo;
         }
 
@@ -161,10 +159,8 @@ public class AnalisadorSintatico {
                 casaToken(Simbolos.menos);
 
             Registro valor = casaToken(Simbolos.value);
-            if (valor.tipo != identificador.tipo) {
-                /**
-                 * Printar erro
-                 */
+            if (valor.token.tipo != identificador.token.tipo) {
+                System.out.println("TIPO ERRADO");
             }
         }
 
@@ -181,7 +177,7 @@ public class AnalisadorSintatico {
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.classe != Classe.variavel) {
+            if (identificador.token.classe != Classe.variavel) {
                 /**
                  * Printar erro
                  */
@@ -199,9 +195,7 @@ public class AnalisadorSintatico {
             casaToken(Simbolos.abreParenteses);
             regraExp = Exp();
             if (regraExp.tipo != Tipo.booleano) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println("TIPO ERRADO");
             }
             casaToken(Simbolos.fechaParenteses);
             if (lexico.registroAtual.token.simbolo == Simbolos.identificador
@@ -295,7 +289,7 @@ public class AnalisadorSintatico {
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.classe != Classe.variavel) {
+            if (identificador.token.classe != Classe.variavel) {
                 /**
                  * Printar erro
                  */
@@ -320,24 +314,6 @@ public class AnalisadorSintatico {
         } else {
             casaToken(Simbolos.pontoEVirgula);
         }
-    }
-
-    // Acho que pode tirar essa regra
-    public void E() throws Exception {
-        if (lexico.registroAtual.token.simbolo == Simbolos.escrever) {
-            casaToken(Simbolos.escrever);
-        } else if (lexico.registroAtual.token.simbolo == Simbolos.escreverLinha) {
-            casaToken(Simbolos.escreverLinha);
-        }
-        casaToken(Simbolos.abreParenteses);
-        Exp();
-        while (lexico.registroAtual.token.simbolo == Simbolos.virgula) {
-            casaToken(Simbolos.virgula);
-            Exp();
-        }
-        casaToken(Simbolos.fechaParenteses);
-        casaToken(Simbolos.pontoEVirgula);
-
     }
 
     public RegraExp Exp() throws Exception {
@@ -396,10 +372,10 @@ public class AnalisadorSintatico {
                  * Printar erro
                  */
             } else {
-                regraX.tipo = regraY.tipo; 
+                regraX.tipo = regraY.tipo;
             }
         } else {
-            regraX.tipo = regraY.tipo; 
+            regraX.tipo = regraY.tipo;
         }
         while (lexico.registroAtual.token.simbolo == Simbolos.mais
                 || lexico.registroAtual.token.simbolo == Simbolos.menos
@@ -476,25 +452,25 @@ public class AnalisadorSintatico {
     public RegraZ Z() throws Exception {
         RegraZ regraZ = new RegraZ();
         RegraExp regraExp = new RegraExp();
-        
+
         if (lexico.registroAtual.token.simbolo == Simbolos.identificador) {
-            Registro identificador = new Registro();
+            Registro identificador;
             identificador = casaToken(Simbolos.identificador);
             int index = tabela.buscarSimbolo(identificador.token.lexema);
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.classe == Classe.tipo_vazio) {
-                /**
-                 * Printar erro
-                 */
+            if (identificador.token.classe == Classe.tipo_vazio) {
+                System.out.println("NAO DECLARADO");
             } else {
                 regraZ.tipo = identificador.tipo;
             }
         } else if (lexico.registroAtual.token.simbolo == Simbolos.value) {
             Registro valor = new Registro();
             valor = casaToken(Simbolos.value);
-            regraZ.tipo = valor.tipo;
+            System.out.println(valor.token.lexema);
+            System.out.println(valor.token.tipo);
+            regraZ.tipo = valor.token.tipo;
         } else if (lexico.registroAtual.token.simbolo == Simbolos.abreParenteses) {
             casaToken(Simbolos.abreParenteses);
             regraExp = Exp();
