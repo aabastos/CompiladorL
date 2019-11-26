@@ -468,8 +468,6 @@ public class AnalisadorSintatico {
         } else if (lexico.registroAtual.token.simbolo == Simbolos.value) {
             Registro valor = new Registro();
             valor = casaToken(Simbolos.value);
-            System.out.println(valor.token.lexema);
-            System.out.println(valor.token.tipo);
             regraZ.tipo = valor.token.tipo;
         } else if (lexico.registroAtual.token.simbolo == Simbolos.abreParenteses) {
             casaToken(Simbolos.abreParenteses);
