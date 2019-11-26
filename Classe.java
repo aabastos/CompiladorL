@@ -7,7 +7,7 @@
 
 public class Classe {
 
-  public static final String tipo_vazio = "tipo_vazio";
+  public static final String vazio = "vazio";
   public static final String variavel = "VAR";
   public static final String constante = "const";
 

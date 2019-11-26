@@ -8,7 +8,6 @@
 
 import java.util.ArrayList;
 
-
 public class TabelaDeSimbolos {
 
     public ArrayList<Registro> tabelaDeSimbolos;
@@ -34,7 +33,6 @@ public class TabelaDeSimbolos {
     }
 
     public int buscarSimbolo(String lexema) {
-        // Ta dando null pointer nessa merda
         for (Registro registro : tabelaDeSimbolos) {
             if (registro.token.lexema.equals(lexema)) {
                 return tabelaDeSimbolos.indexOf(registro);
@@ -50,5 +48,4 @@ public class TabelaDeSimbolos {
             return -1;
         }
     }
-
 }

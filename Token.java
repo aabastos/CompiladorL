@@ -9,9 +9,24 @@ public class Token {
 
     public byte simbolo;
     public String lexema;
+    public String classe;
+    public String tipo;
 
     public Token() {
 
+    }
+
+    public Token(byte simbolo, String lexema, String classe, String tipo) {
+        this.simbolo = simbolo;
+        this.lexema = lexema;
+        this.classe = classe;
+        this.tipo = tipo;
+    }
+
+    public Token(byte simbolo, String lexema, String tipo) {
+        this.simbolo = simbolo;
+        this.lexema = lexema;
+        this.tipo = tipo;
     }
 
     public Token(byte simbolo, String lexema) {

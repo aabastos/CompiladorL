@@ -78,4 +78,5 @@
               ERRO
           Exp.tipo := booleano
       }
+
 (26) {  Exp.comp := verdadeiro  }
