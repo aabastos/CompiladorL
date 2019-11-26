@@ -86,7 +86,7 @@ public class AnalisadorSintatico {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
 
-            if (identificador.token.classe != Classe.tipo_vazio) {
+            if (identificador.token.classe != Classe.vazio) {
                 /**
                  * Printar erro
                  */
@@ -142,8 +142,10 @@ public class AnalisadorSintatico {
             identificador = tabela.tabelaDeSimbolos.get(index);
         }
 
-        if (identificador.token.classe != Classe.tipo_vazio) {
-            System.out.println("CLASSE VAZIA");
+        if (identificador.token.classe != Classe.vazio) {
+            System.out.println(
+                    lexico.leitor.numeroLinha + ":identificador ja declarado [" + identificador.token.lexema + "].");
+            System.exit(1);
         } else {
             identificador.token.classe = Classe.variavel;
             identificador.token.tipo = tipo;
@@ -160,7 +162,8 @@ public class AnalisadorSintatico {
 
             Registro valor = casaToken(Simbolos.value);
             if (valor.token.tipo != identificador.token.tipo) {
-                System.out.println("TIPO ERRADO");
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
         }
 
@@ -177,17 +180,20 @@ public class AnalisadorSintatico {
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.token.classe != Classe.variavel) {
-                /**
-                 * Printar erro
-                 */
+            if (identificador.token.classe == Classe.vazio) {
+                System.out.println(lexico.leitor.numeroLinha + ":identificador nao declarado ["
+                        + identificador.token.lexema + "].");
+                System.exit(1);
+            } else if (identificador.token.classe != Classe.variavel) {
+                System.out.println(lexico.leitor.numeroLinha + ":classe de identificador incompativel ["
+                        + identificador.token.lexema + "].");
+                System.exit(1);
             }
             casaToken(Simbolos.igual);
             regraExp = Exp();
             if (identificador.tipo != regraExp.tipo) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
             casaToken(Simbolos.pontoEVirgula);
         } else if (lexico.registroAtual.token.simbolo == Simbolos.enquanto) {
@@ -195,7 +201,8 @@ public class AnalisadorSintatico {
             casaToken(Simbolos.abreParenteses);
             regraExp = Exp();
             if (regraExp.tipo != Tipo.booleano) {
-                System.out.println("TIPO ERRADO");
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
             casaToken(Simbolos.fechaParenteses);
             if (lexico.registroAtual.token.simbolo == Simbolos.identificador
@@ -226,9 +233,8 @@ public class AnalisadorSintatico {
             casaToken(Simbolos.abreParenteses);
             regraExp = Exp();
             if (regraExp.tipo != Tipo.booleano) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
             casaToken(Simbolos.fechaParenteses);
             casaToken(Simbolos.entao);
@@ -289,10 +295,14 @@ public class AnalisadorSintatico {
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.token.classe != Classe.variavel) {
-                /**
-                 * Printar erro
-                 */
+            if (identificador.token.classe == Classe.vazio) {
+                System.out.println(lexico.leitor.numeroLinha + ":identificador nao declarado ["
+                        + identificador.token.lexema + "].");
+                System.exit(1);
+            } else if (identificador.token.classe != Classe.variavel) {
+                System.out.println(lexico.leitor.numeroLinha + ":classe de identificador incompativel ["
+                        + identificador.token.lexema + "].");
+                System.exit(1);
             }
             casaToken(Simbolos.fechaParenteses);
             casaToken(Simbolos.pontoEVirgula);
@@ -344,9 +354,8 @@ public class AnalisadorSintatico {
             }
             regraX = X();
             if (regraExp.tipo != regraX.tipo) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
         }
         return regraExp;
@@ -368,9 +377,8 @@ public class AnalisadorSintatico {
         regraY = Y();
         if (regraX.sinal) {
             if (regraY.tipo == Tipo.string || regraY.tipo == Tipo.booleano) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             } else {
                 regraX.tipo = regraY.tipo;
             }
@@ -382,31 +390,27 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.ou) {
             if (lexico.registroAtual.token.simbolo == Simbolos.mais) {
                 if (regraX.tipo == Tipo.booleano) {
-                    /**
-                     * Printar erro
-                     */
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
                 }
                 casaToken(Simbolos.mais);
             } else if (lexico.registroAtual.token.simbolo == Simbolos.menos) {
                 if (regraX.tipo != Tipo.inteiro && regraX.tipo != Tipo.bit) {
-                    /**
-                     * Printar erro
-                     */
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
                 }
                 casaToken(Simbolos.menos);
             } else {
                 if (regraX.tipo != Tipo.booleano) {
-                    /**
-                     * Printar erro
-                     */
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
                 }
                 casaToken(Simbolos.ou);
             }
             regraY = Y();
             if (regraX.tipo != regraY.tipo) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
         }
         return regraX;
@@ -427,22 +431,19 @@ public class AnalisadorSintatico {
                 casaToken(Simbolos.divisao);
             } else {
                 if (regraY.tipo != Tipo.booleano) {
-                    /**
-                     * Printar erro
-                     */
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
                 }
                 casaToken(Simbolos.e);
             }
             regraZ = Z();
             if (regraY.tipo != regraZ.tipo) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             } else {
                 if (regraZ.tipo == Tipo.string) {
-                    /**
-                     * Printar erro
-                     */
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
                 }
             }
         }
@@ -460,8 +461,10 @@ public class AnalisadorSintatico {
             if (index != -1) {
                 identificador = tabela.tabelaDeSimbolos.get(index);
             }
-            if (identificador.token.classe == Classe.tipo_vazio) {
-                System.out.println("NAO DECLARADO");
+            if (identificador.token.classe == Classe.vazio) {
+                System.out.println(lexico.leitor.numeroLinha + ":identificador nao declarado ["
+                        + identificador.token.lexema + "].");
+                System.exit(1);
             } else {
                 regraZ.tipo = identificador.tipo;
             }
@@ -478,9 +481,8 @@ public class AnalisadorSintatico {
             casaToken(Simbolos.nao);
             regraExp = Exp();
             if (regraExp.tipo != Tipo.booleano) {
-                /**
-                 * Printar erro
-                 */
+                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                System.exit(1);
             }
         }
         return regraZ;

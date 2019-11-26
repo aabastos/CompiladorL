@@ -232,7 +232,7 @@ public class AnalisadorLexico {
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));
     } else if (identificador == true && tipoConstante == null) {
       if (tabelaDeSimbolos.buscarSimbolo(lexema) == -1) {
-        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.identificador, lexema, Classe.tipo_vazio, ""));
+        tabelaDeSimbolos.adicionarRegistro(new Token(Simbolos.identificador, lexema, Classe.vazio, ""));
       }
 
       registroAtual = tabelaDeSimbolos.tabelaDeSimbolos.get(tabelaDeSimbolos.buscarSimbolo(lexema));

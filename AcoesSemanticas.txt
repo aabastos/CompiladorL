@@ -70,6 +70,12 @@
           ERRO
       }
 (24)  { Exp.tipo := X.tipo }
-(25)  { se X1.tipo != X.tipo 
+(25)  { se X1.tipo != Exp.tipo 
           ERRO
+        senao
+          se Exp.comp == true
+            se X1.tipo == booleano || X1.tipo == arranjo(0...255, caractere)
+              ERRO
+          Exp.tipo := booleano
       }
+(26) {  Exp.comp := verdadeiro  }
