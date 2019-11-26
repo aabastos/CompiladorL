@@ -21,7 +21,7 @@ public class TabelaDeSimbolos {
         tabelaDeSimbolos.add(new Registro(token));
     }
 
-    public void adicionarRegistro(Token token, Tipo tipo) {
+    public void adicionarRegistro(Token token, String tipo) {
         tabelaDeSimbolos.add(new Registro(token, tipo));
     }
 

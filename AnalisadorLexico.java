@@ -22,7 +22,7 @@ public class AnalisadorLexico {
 
   public void getProximoRegistro() throws Exception {
     String lexema = "";
-    Tipo tipoConstante = null;
+    String tipoConstante = null;
     boolean identificador = false;
 
     int estado = estadoInicial;

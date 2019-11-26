@@ -66,10 +66,10 @@ public class AnalisadorSintatico {
                 || lexico.registroAtual.token.simbolo == Simbolos.bit
                 || lexico.registroAtual.token.simbolo == Simbolos.string) {
             RegraT regraT = T();
-            V();
+            V(regraT.tipo);
             while (lexico.registroAtual.token.simbolo == Simbolos.virgula) {
                 casaToken(Simbolos.virgula);
-                V();
+                V(regraT.tipo);
             }
             casaToken(Simbolos.pontoEVirgula);
 
@@ -108,19 +108,19 @@ public class AnalisadorSintatico {
         return regraT;
     }
 
-    public void V(Tipo tipo) throws Exception {
-        Registro identificador;
+    public void V(String tipo) throws Exception {
+        Registro identificador = new Registro();
         if (lexico.registroAtual.token.simbolo == Simbolos.identificador) {
             identificador = casaToken(Simbolos.identificador);
         }
 
-        if (identificador.token.classe != Classe.vazio) {
+        if (identificador.classe != Classe.tipo_vazio) {
             /**
              * Printar erro
              */
         } else {
-            identificador.token.classe = Classe.variavel;
-            identificador.token.tipo = tipo;
+            identificador.classe = Classe.variavel;
+            identificador.tipo = tipo;
         }
 
         if (lexico.registroAtual.token.simbolo == Simbolos.igual) {
@@ -132,7 +132,7 @@ public class AnalisadorSintatico {
                 casaToken(Simbolos.menos);
 
             Registro valor = casaToken(Simbolos.value);
-            if (valor.token.tipo != identificador.token.tipo) {
+            if (valor.tipo != identificador.tipo) {
                 /**
                  * Printar erro
                  */
@@ -355,5 +355,5 @@ public class AnalisadorSintatico {
 }
 
 class RegraT {
-    public Tipo tipo;
+    public String tipo;
 }

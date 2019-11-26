@@ -5,8 +5,11 @@
  *  Classe que possui constantes para os três tipos de constantes da linguagem
 */
 
-public enum Tipo {
+public class Tipo {
 
-    inteiro, bit, booleano, string
+    public static final String inteiro = "inteiro";
+    public static final String booleano = "boolean";
+    public static final String bit = "byte";
+    public static final String string = "arranjo(0...255, caractere)";
 
 }

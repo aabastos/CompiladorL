@@ -5,8 +5,10 @@
  *  Classe que possui constantes para os três tipos de constantes da linguagem
 */
 
-public enum Classe {
+public class Classe {
 
-  vazio, variavel, constante
+  public static final String tipo_vazio = "tipo_vazio";
+  public static final String variavel = "VAR";
+  public static final String constante = "const";
 
 }

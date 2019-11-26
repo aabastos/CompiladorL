@@ -9,8 +9,9 @@
 public class Registro {
 
     public Token token;
-    public Tipo tipo;
+    public String tipo;
     public String endereco;
+    public String classe;
 
     public Registro() {
     }
@@ -19,7 +20,7 @@ public class Registro {
         this.token = token;
     }
 
-    public Registro(Token token, Tipo tipo) {
+    public Registro(Token token, String tipo) {
         this.token = token;
         this.tipo = tipo;
     }
@@ -38,11 +39,11 @@ public class Registro {
         this.token = token;
     }
 
-    public Tipo getTipo() {
+    public String getTipo() {
         return this.tipo;
     }
 
-    public void setTipo(Tipo tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -52,6 +53,14 @@ public class Registro {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getClasse() {
+        return classe;
+    }
+
+    public void setClasse(String classe) {
+        this.classe = classe;
     }
 
 }
