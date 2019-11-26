@@ -4,8 +4,6 @@
  *        Vitor Fernandes
 */
 
-import java.util.Scanner;
-
 public class L {
 
   public static TabelaDeSimbolos tabela = new TabelaDeSimbolos();

@@ -14,6 +14,7 @@ public class Registro {
     public String classe;
 
     public Registro() {
+        this.classe = Classe.tipo_vazio;
     }
 
     public Registro(Token token) {

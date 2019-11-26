@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Leitor {
-  private char proximoChar;
   private BufferedReader arquivo;
 
   public int numeroLinha = 1;

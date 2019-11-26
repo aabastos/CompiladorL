@@ -69,3 +69,7 @@
 (23)  { se X.tipo != Y1.tipo
           ERRO
       }
+(24)  { Exp.tipo := X.tipo }
+(25)  { se X1.tipo != X.tipo 
+          ERRO
+      }
