@@ -2,15 +2,17 @@
  * Teste const comecando com zero
  */
  integer n = 10;
+ boolean flag = true;
+ string str;
  const num=0123;
 
  /******************************/
  main
     writeln('Digite um numero maior que zero: ');
     readln(n);
-    while(true) begin
+    while(flag) begin
         if(n/2 == (n-1)/2) then writeln('Numero impar: ', n);
         else writeln('Numero par: ', n);
-        n=n-1;
+        n=n-num;
     end
  end
