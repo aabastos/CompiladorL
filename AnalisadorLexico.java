@@ -182,6 +182,10 @@ public class AnalisadorLexico {
         if (proximo == '*') {
           estado = 11;
         } else {
+          if (proximo == Caracteres.EOF) {
+            System.out.println(leitor.numeroLinha + ":fim de arquivo nao esperado");
+            System.exit(1);
+          }
           estado = 10;
         }
         break;
