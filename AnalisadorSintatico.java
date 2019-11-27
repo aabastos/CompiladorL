@@ -358,8 +358,13 @@ public class AnalisadorSintatico {
             }
             regraX = X();
             if (regraExp.tipo != regraX.tipo) {
-                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
-                System.exit(1);
+                if ((regraExp.tipo == Tipo.inteiro || regraX.tipo == Tipo.inteiro)
+                        && (regraExp.tipo == Tipo.bit || regraX.tipo == Tipo.bit)) {
+                    regraExp.tipo = Tipo.inteiro;
+                } else {
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
+                }
             } else {
                 if (regraExp.comp == true) {
                     if (regraX.tipo == Tipo.booleano || regraX.tipo == Tipo.string) {
@@ -422,8 +427,13 @@ public class AnalisadorSintatico {
             }
             regraY = Y();
             if (regraX.tipo != regraY.tipo) {
-                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
-                System.exit(1);
+                if ((regraX.tipo == Tipo.inteiro || regraY.tipo == Tipo.inteiro)
+                        && (regraX.tipo == Tipo.bit || regraY.tipo == Tipo.bit)) {
+                    regraX.tipo = Tipo.inteiro;
+                } else {
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
+                }
             }
         }
         return regraX;
@@ -452,8 +462,13 @@ public class AnalisadorSintatico {
 
             regraZ = Z();
             if (regraY.tipo != regraZ.tipo) {
-                System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
-                System.exit(1);
+                if ((regraY.tipo == Tipo.inteiro || regraZ.tipo == Tipo.inteiro)
+                        && (regraY.tipo == Tipo.bit || regraZ.tipo == Tipo.bit)) {
+                    regraY.tipo = Tipo.inteiro;
+                } else {
+                    System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");
+                    System.exit(1);
+                }
             } else {
                 if (regraZ.tipo == Tipo.string) {
                     System.out.println(lexico.leitor.numeroLinha + ":tipos incompativeis.");

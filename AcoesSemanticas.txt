@@ -43,7 +43,10 @@
           ERRO
       }
 (17)  { se Y.tipo != Z1.tipo
-          ERRO
+          se (Y.tipo == inteiro || Z1.tipo == inteiro) && (Y.tipo == byte || Z1.tipo == byte)
+            Y.tipo := inteiro
+          senao
+            ERRO
         senao
           se Z1.tipo == arranjo(0, 255, caractere)
             ERRO
@@ -67,11 +70,17 @@
         ERRO
       }
 (23)  { se X.tipo != Y1.tipo
-          ERRO
+          se (X.tipo == inteiro || Y1.tipo == inteiro) && (X.tipo == byte || Y1.tipo == byte)
+            X.tipo := inteiro
+          senao
+            ERRO
       }
 (24)  { Exp.tipo := X.tipo }
 (25)  { se X1.tipo != Exp.tipo 
-          ERRO
+          se (Exp.tipo == inteiro || X1.tipo == inteiro) && (Exp.tipo == byte || X1.tipo == byte)
+            Exp.tipo := inteiro
+          senao
+            ERRO
         senao
           se Exp.comp == true
             se X1.tipo == booleano || X1.tipo == arranjo(0...255, caractere)

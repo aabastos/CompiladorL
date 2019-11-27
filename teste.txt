@@ -4,13 +4,14 @@
  integer n = 10;
  boolean flag = true;
  string str;
- const num=0123;
+ const num=123;
 
  /******************************/
  main
     writeln('Digite um numero maior que zero: ');
     readln(n);
-    while(flag) begin
+    a = true;
+    while(true and false) begin
         if(n/2 == (n-1)/2) then writeln('Numero impar: ', n);
         else writeln('Numero par: ', n);
         n=n-num;
